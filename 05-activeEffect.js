@@ -26,7 +26,7 @@ function trigger(target, key) {
   }
   let dep = depsMap.get(key) // If there are dependencies (effects) associated with this
   if (dep) {
-    dep.forEach(effect => {
+    dep.forEach((effect) => {
       // run them all
       effect()
     })
@@ -43,7 +43,7 @@ function reactive(target) {
     set(target, key, value, receiver) {
       let oldValue = target[key]
       let result = Reflect.set(target, key, value, receiver)
-      if (oldValue != result) {
+      if (result && oldValue != value) {
         trigger(target, key) // If this reactive property (target) has effects to rerun on SET, trigger them.
       }
       return result
