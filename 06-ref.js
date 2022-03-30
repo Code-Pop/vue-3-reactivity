@@ -59,8 +59,10 @@ function ref(raw) {
       return raw
     },
     set value(newVal) {
-      raw = newVal
-      trigger(r, 'value')
+      if(raw != newVal){
+        raw = newVal
+        trigger(r, 'value')
+      } 
     },
   }
   return r
